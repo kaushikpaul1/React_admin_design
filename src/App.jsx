@@ -1,32 +1,34 @@
 import React, { useEffect } from 'react';
-import {
-  Routes,
-  Route,
-  useLocation
-} from 'react-router-dom';
+// import {
+//   Routes,
+//   Route,
+//   useLocation
+// } from 'react-router-dom';
 
 import './css/style.css';
 
 import './charts/ChartjsConfig';
 
 // Import pages
-import Dashboard from './pages/Dashboard';
+import router from './router';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
 
-  const location = useLocation();
+  // const location = useLocation();
 
-  useEffect(() => {
-    document.querySelector('html').style.scrollBehavior = 'auto'
-    window.scroll({ top: 0 })
-    document.querySelector('html').style.scrollBehavior = ''
-  }, [location.pathname]); // triggered on route change
+  // useEffect(() => {
+  //   document.querySelector('html').style.scrollBehavior = 'auto'
+  //   window.scroll({ top: 0 })
+  //   document.querySelector('html').style.scrollBehavior = ''
+  // }, [location.pathname]); 
 
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route exact path="/" element={<Dashboard />} />
-      </Routes>
+      </Routes> */}
+      <RouterProvider router={router}/>
     </>
   );
 }
