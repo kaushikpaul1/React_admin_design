@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminLayout from "./pages/layouts/AdminLayout";
 import Dashboard from "./pages/Dashboard";
 import CaseRegistration from "./pages/CaseRegistration";
+import Register from "./pages/auth/Register";
 
 const router = createBrowserRouter([
     {
@@ -18,5 +19,9 @@ const router = createBrowserRouter([
             },
         ]
     },
+    {
+        path:'/register',
+        element: <Register/>
+    }
 ])
 export default router;
