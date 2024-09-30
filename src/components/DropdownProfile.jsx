@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Transition from '../utils/Transition';
+import axios from 'axios';
+
 
 
 function DropdownProfile({
@@ -13,6 +15,7 @@ function DropdownProfile({
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
+  const navigate = useNavigate();
 
   // close on click outside
   useEffect(() => {
@@ -35,6 +38,22 @@ function DropdownProfile({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  // Handle logout functionality
+  const handleLogout = async () => { // New function added
+    try {
+      await axios.post('http://localhost:8000/api/logout'); // Make the logout API call
+      // Optionally clear any user-related state or local storage here
+      // localStorage.removeItem('user'); // Example: remove user data from local storage
+
+      // Redirect to sign-in page after logout
+      navigate('/'); // Use navigate to redirect to sign-in page
+    } catch (error) {
+      console.error('Error logging out:', error); // Log the error
+      alert('Logout failed. Please try again.'); // Show an alert on error
+    } finally {
+      setDropdownOpen(false); // Close the dropdown after logout
+    }
+  };
   return (
     <div className="relative inline-flex">
       <button
@@ -88,8 +107,9 @@ function DropdownProfile({
             <li>
               <Link
                 className="font-medium text-sm text-violet-500 hover:text-violet-600 dark:hover:text-violet-400 flex items-center py-1 px-3"
-                to="/signin"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                to="#"
+                // onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={handleLogout}
               >
                 Sign Out
               </Link>

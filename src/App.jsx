@@ -12,6 +12,7 @@ import './charts/ChartjsConfig';
 // Import pages
 import router from './router';
 import { RouterProvider } from 'react-router-dom';
+import { ContextProvider } from './utils/ContextProvider';
 
 function App() {
 
@@ -28,7 +29,9 @@ function App() {
       {/* <Routes>
         <Route exact path="/" element={<Dashboard />} />
       </Routes> */}
-      <RouterProvider router={router}/>
+      <ContextProvider>
+        <RouterProvider router={router} />
+      </ContextProvider>
     </>
   );
 }

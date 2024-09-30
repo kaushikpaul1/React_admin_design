@@ -4,13 +4,14 @@ import Sidebar from '../../partials/Sidebar';
 import Header from '../../partials/Header';
 
 import Banner from '../../partials/Banner';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useStateContext } from '../../utils/ContextProvider';
 
 function Dashboard() {
-
+    const { token } = useStateContext()
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    return (
+    return (!token) ? (<Navigate to="/" />) : (
         <div className="flex h-screen overflow-hidden">
 
             {/* Sidebar */}
@@ -23,7 +24,7 @@ function Dashboard() {
                 <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
                 <main className="grow">
-                    <Outlet/>
+                    <Outlet />
                 </main>
 
                 <Banner />
