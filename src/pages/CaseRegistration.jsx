@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +7,7 @@ import axiosClient from '../axios-client';
 
 function CaseRegistration() {
   const [submissionMessage, setSubmissionMessage] = useState('');
+  const [dist, setDistricts] = useState([]);
 
 
   const formik = useFormik({
@@ -16,15 +17,18 @@ function CaseRegistration() {
       lastname: '',
       email: '',
       phone: '',
-      desc: ''
+      desc: '',
+      dist: '',
     },
     validationSchema: Yup.object({
       firstname: Yup.string().required('First name is required'),
       lastname: Yup.string().required('Last name is required'),
       email: Yup.string().email('Email address is invalid').required('Email is required'),
-      phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be 10 digits').required('Phone number is required')
+      phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be 10 digits').required('Phone number is required'),
+      dist: Yup.string().required('Dist is required'),
     }),
     onSubmit: async (values) => {
+
       try {
         await axiosClient.post(`/case-reg`, values)
         setSubmissionMessage('Form Submitted Successfully');
@@ -37,6 +41,23 @@ function CaseRegistration() {
       }
     },
   });
+
+  useEffect(() => {
+    const fetchDistricts = async () => {
+      try {
+        const response = await axiosClient.get(`/dist`);
+        if (response.status === 200) {
+          setDistricts(response.data);
+        } else {
+          console.error('Error fetching districts:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching districts:', error);
+      }
+    };
+
+    fetchDistricts();
+  }, []);
 
   return (
     <section className="text-gray-600 body-font relative">
@@ -134,6 +155,32 @@ function CaseRegistration() {
                       onBlur={formik.handleBlur} />
                     {formik.touched.phone && formik.errors.phone && (
                       <p className="text-red-500 text-xs italic">{formik.errors.phone}</p>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="p-2 w-1/5">
+                  <div className="relative">
+                    <label htmlFor="dist" className="leading-7 ml-1 text-sm text-gray-600">
+                      Choose District:<span className="text-red-700">*</span>
+                    </label>
+                    <select
+                      id="dist"
+                      name="dist"
+                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-7 transition-colors duration-200 ease-in-out"
+                      value={formik.values.dist}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    >
+                      <option value="">Select District</option>
+                      {dist.map((dist) => (
+                        <option key={dist.id} value={dist.id}>
+                          {dist.dist_name}
+                        </option>
+                      ))}
+                    </select>
+                    {formik.touched.dist && formik.errors.dist && (
+                      <p className="text-red-500 text-xs italic">{formik.errors.dist}</p>
                     )}
                   </div>
                 </div>

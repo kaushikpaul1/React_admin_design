@@ -63,7 +63,7 @@ function Sidebar({
         className={`flex lg:!flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-gray-800 p-3 transition-all duration-200 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} ${variant === 'v2' ? 'border-r border-gray-200 dark:border-gray-700/60' : 'rounded-r-2xl shadow-sm'}`}
       >
         {/* Sidebar header */}
-        <div className="flex justify-between mb-4 pr-3 sm:px-2">
+        <div className="flex justify-between mb-4 pr-5 sm:px-0">
           {/* Close button */}
           <button
             ref={trigger}
@@ -72,10 +72,10 @@ function Sidebar({
             aria-controls="sidebar"
             aria-expanded={sidebarOpen}
           >
-            <span className="sr-only">Close sidebar</span>
+            {/* <span className="sr-only">Close sidebar</span>
             <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z" />
-            </svg>
+            </svg> */}
           </button>
           {/* Logo */}
           {/* <NavLink end to="/" className="block">
@@ -87,8 +87,8 @@ function Sidebar({
             <span className="text-lg font-semibold">WEST BENGAL TAXATION TRIBUNAL</span>
           </NavLink> */}
           <NavLink end to="/"
-            className="block  text-gray-800 rounded-lg transition duration-300 bg-blue-500 ">
-            <span className="text-xl font-bold tracking-wide">WEST BENGAL <br /> TAXATION TRIBUNAL</span>
+            className="block text-gray-800 rounded-lg transition duration-300  ">
+            <span className="text-base sm:text-lg font-extrabold tracking-wide font-serif"> &nbsp; &nbsp; &nbsp; WEST BENGAL <br /> TAXATION TRIBUNAL</span>
           </NavLink>
 
         </div>
@@ -155,7 +155,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -168,7 +168,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -237,7 +237,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -284,7 +284,7 @@ function Sidebar({
               <li className={`pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] ${pathname.includes("calendar") && "from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]"}`}>
                 <NavLink
                   end
-                  to="https://cruip.com/mosaic/"
+                  to="/"
                   className={`block text-gray-800 dark:text-gray-100 truncate transition duration-150 ${pathname.includes("calendar") ? "" : "hover:text-gray-900 dark:hover:text-white"
                     }`}
                 >
@@ -304,7 +304,7 @@ function Sidebar({
               <li className={`pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] ${pathname.includes("campaigns") && "from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]"}`}>
                 <NavLink
                   end
-                  to="https://cruip.com/mosaic/"
+                  to="/"
                   className={`block text-gray-800 dark:text-gray-100 truncate transition duration-150 ${pathname.includes("campaigns") ? "" : "hover:text-gray-900 dark:hover:text-white"
                     }`}
                 >
@@ -355,7 +355,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -368,7 +368,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -381,7 +381,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -394,7 +394,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -407,7 +407,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -420,7 +420,7 @@ function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="https://cruip.com/mosaic/"
+                              to="/"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " + (isActive ? "text-violet-500" : "text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200")
                               }
@@ -445,7 +445,7 @@ function Sidebar({
         </div>
 
         {/* Expand / collapse button */}
-        <div className="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
+        {/* <div className="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
           <div className="w-12 pl-4 pr-3 py-2">
             <button className="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400" onClick={() => setSidebarExpanded(!sidebarExpanded)}>
               <span className="sr-only">Expand / collapse sidebar</span>
@@ -454,7 +454,7 @@ function Sidebar({
               </svg>
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
