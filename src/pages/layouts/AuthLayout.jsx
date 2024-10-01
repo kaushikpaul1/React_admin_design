@@ -6,7 +6,7 @@ const AuthLayout = () => {
     const { token } = useStateContext()
     if (token) {
         return <Navigate to="/dashboard" />
-      }
+    }
     return (
         <>
             <main className="grow">

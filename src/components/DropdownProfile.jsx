@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Transition from '../utils/Transition';
 import axios from 'axios';
+import axiosClient from '../axios-client';
+
 
 
 
@@ -38,22 +40,20 @@ function DropdownProfile({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  // Handle logout functionality
-  const handleLogout = async () => { // New function added
+  const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8000/api/logout'); // Make the logout API call
-      // Optionally clear any user-related state or local storage here
-      // localStorage.removeItem('user'); // Example: remove user data from local storage
-
-      // Redirect to sign-in page after logout
-      navigate('/'); // Use navigate to redirect to sign-in page
+      // await axiosClient.post(`/logout`); 
+      localStorage.removeItem('ACCESS_TOKEN');
+      // navigate("/");  
+      window.location.reload();
     } catch (error) {
-      console.error('Error logging out:', error); // Log the error
-      alert('Logout failed. Please try again.'); // Show an alert on error
+      console.error('Error logging out:', error);
+      alert('Logout failed. Please try again.');
     } finally {
-      setDropdownOpen(false); // Close the dropdown after logout
+      setDropdownOpen(false);
     }
   };
+
   return (
     <div className="relative inline-flex">
       <button

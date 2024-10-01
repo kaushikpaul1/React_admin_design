@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axiosClient from '../axios-client';
+
 
 function CaseRegistration() {
   const [submissionMessage, setSubmissionMessage] = useState('');
@@ -23,16 +25,14 @@ function CaseRegistration() {
       phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be 10 digits').required('Phone number is required')
     }),
     onSubmit: async (values) => {
-      const apiUrl = 'http://localhost:8000/api/case-reg';
-
       try {
-        await axios.post(apiUrl, values);
+        await axiosClient.post(`/case-reg`, values)
         setSubmissionMessage('Form Submitted Successfully');
         // alert('Form Submitted Successfully');
         formik.resetForm();
         // window.location.reload();
       } catch (error) {
-        setSubmissionMessage('Error Submitting Form');
+        setSubmissionMessage('Error Submitting Form'.error);
         // alert('Error Submitting Form');
       }
     },

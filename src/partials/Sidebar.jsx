@@ -60,7 +60,7 @@ function Sidebar({
       <div
         id="sidebar"
         ref={sidebar}
-        className={`flex lg:!flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-gray-800 p-4 transition-all duration-200 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} ${variant === 'v2' ? 'border-r border-gray-200 dark:border-gray-700/60' : 'rounded-r-2xl shadow-sm'}`}
+        className={`flex lg:!flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-gray-800 p-3 transition-all duration-200 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} ${variant === 'v2' ? 'border-r border-gray-200 dark:border-gray-700/60' : 'rounded-r-2xl shadow-sm'}`}
       >
         {/* Sidebar header */}
         <div className="flex justify-between mb-4 pr-3 sm:px-2">
@@ -86,11 +86,8 @@ function Sidebar({
           {/* <NavLink end to="/" className="block">
             <span className="text-lg font-semibold">WEST BENGAL TAXATION TRIBUNAL</span>
           </NavLink> */}
-          <NavLink
-            end
-            to="/"
-            className="block p-2 text-gray-800 rounded-lg transition duration-300 "
-          >
+          <NavLink end to="/"
+            className="block  text-gray-800 rounded-lg transition duration-300 bg-blue-500 ">
             <span className="text-xl font-bold tracking-wide">WEST BENGAL <br /> TAXATION TRIBUNAL</span>
           </NavLink>
 
@@ -246,7 +243,7 @@ function Sidebar({
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                               Case List
+                                Case List
                               </span>
                             </NavLink>
                           </li>

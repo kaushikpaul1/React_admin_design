@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import axios from 'axios';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import axiosClient from '../../axios-client';
+
 
 const Register = () => {
-    // Formik configuration
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -29,17 +29,12 @@ const Register = () => {
             terms: Yup.boolean()
                 .oneOf([true], 'You must accept the terms and conditions')
         }),
-        // onSubmit: values => {
-        //     // Submit form data (replace this with actual API call)
-        //     console.log(values);
-        // }
+        
         onSubmit: async (values) => {
-            const apiUrl = 'http://localhost:8000/api/register';
-
             try {
-                await axios.post(apiUrl, values);
+                await axiosClient.post(`/register`, values)
                 //   setSubmissionMessage('Registration Successfully');
-                alert('Form Submitted Successfully');
+                alert('Registration Successfully');
                 formik.resetForm();
                 // window.location.reload();
             } catch (error) {
