@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Sidebar from '../../partials/Sidebar';
 import Header from '../../partials/Header';
@@ -8,8 +8,17 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../../utils/ContextProvider';
 
 function Dashboard() {
-    const { token } = useStateContext()
+    const { token, setRole } = useStateContext()
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        // const role = localStorage.getItem('userRole');
+        const storedRole = JSON.parse(localStorage.getItem('userRole'));
+        setRole(storedRole);  
+        // console.log('User role:', storedRole);
+    }, [setRole]);
+  
+
 
     return (!token) ? (<Navigate to="/" />) : (
         <div className="flex h-screen overflow-hidden">

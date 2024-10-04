@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axiosClient from '../../axios-client';
 
 
 const Register = () => {
+    const [roles, setRoles] = useState([]);
     const formik = useFormik({
         initialValues: {
+            role: '',
             name: '',
             email: '',
             password: '',
@@ -14,6 +16,7 @@ const Register = () => {
             terms: false
         },
         validationSchema: Yup.object({
+            role: Yup.string().required('Role is required'),
             name: Yup.string()
                 .max(255, 'Name must be 255 characters or less')
                 .required('Name is required'),
@@ -29,7 +32,7 @@ const Register = () => {
             terms: Yup.boolean()
                 .oneOf([true], 'You must accept the terms and conditions')
         }),
-        
+
         onSubmit: async (values) => {
             try {
                 await axiosClient.post(`/register`, values)
@@ -43,6 +46,22 @@ const Register = () => {
             }
         },
     });
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const response = await axiosClient.get(`/role`);
+                if (response.status === 200) {
+                    setRoles(response.data);
+                } else {
+                    console.error('Error fetching districts:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching districts:', error);
+            }
+        };
+
+        fetchRoles();
+    }, []);
     return (
         <>
             <section class="bg-gray-50 dark:bg-gray-900">
@@ -58,6 +77,44 @@ const Register = () => {
                                 Create an account
                             </h1>
                             <form class="space-y-2 md:space-y-4" onSubmit={formik.handleSubmit}>
+                                {/* <div>
+                                    <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Role:</label>
+                                    <select  name="role" id="role" class="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Name" required=""
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.role} />
+                                    {formik.touched.role && formik.errors.role ? (
+                                        <div className="text-red-500 text-xs italic ml-1">{formik.errors.role}</div>
+                                    ) : null}
+                                </div> */}
+                                <div>
+                                    <label
+                                        htmlFor="role"
+                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    >
+                                        Select Role:
+                                    </label>
+
+                                    <select
+                                        name="role"
+                                        id="role"
+                                        className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.role}
+                                    >
+                                        <option value="">-- Select a Role --</option>
+                                        {roles.map((role) => (
+                                            <option key={role.id} value={role.id}>
+                                                {role.name}
+                                            </option>
+                                        ))}
+                                    </select>
+
+                                    {formik.touched.role && formik.errors.role ? (
+                                        <div className="text-red-500 text-xs italic ml-1">{formik.errors.role}</div>
+                                    ) : null}
+                                </div>
                                 <div>
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
                                     <input type="text" name="name" id="name" class="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Name" required=""

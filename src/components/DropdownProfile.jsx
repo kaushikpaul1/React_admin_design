@@ -5,6 +5,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Transition from '../utils/Transition';
 import axios from 'axios';
 import axiosClient from '../axios-client';
+import { useStateContext } from '../utils/ContextProvider';
 
 
 
@@ -14,7 +15,7 @@ function DropdownProfile({
 }) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const { role } = useStateContext()
   const trigger = useRef(null);
   const dropdown = useRef(null);
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ function DropdownProfile({
         </div>
 
         <div className="flex items-center truncate">
-          <span className="truncate ml-2 text-sm font-medium text-gray-600 dark:text-gray-100 group-hover:text-gray-800 dark:group-hover:text-white">Admin</span>
+          <span className="truncate ml-2 text-sm font-medium text-gray-600 dark:text-gray-100 group-hover:text-gray-800 dark:group-hover:text-white">{role.role_name}</span>
           <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 dark:text-gray-500" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
@@ -91,8 +92,8 @@ function DropdownProfile({
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200 dark:border-gray-700/60">
-            <div className="font-medium text-gray-800 dark:text-gray-100">Admin</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 italic">Administrator</div>
+            <div className="font-medium text-gray-800 dark:text-gray-100">{role.role_name}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 italic">{role.role_name === 'Admin' ? 'Administrator' : ''}</div>
           </div>
           <ul>
             <li>

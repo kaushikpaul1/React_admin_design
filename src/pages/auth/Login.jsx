@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -24,13 +24,16 @@ const Login = () => {
                 .required('Password is required'),
         }),
         onSubmit: async (values) => {
-            // const apiUrl = 'http://localhost:8000/api/login';
-
             await axiosClient.post(`/login`, values)
                 .then(({ data }) => {
                     console.log(data)
                     // setUser(data.user)
                     setToken(data.token)
+                    // localStorage.setItem('userRole', data.role); 
+                    localStorage.setItem('userRole', JSON.stringify(data.role)); 
+                    // console.log(data.role.role_name); 
+                    
+
                 })
                 .catch(err => {
                     const response = err.response;

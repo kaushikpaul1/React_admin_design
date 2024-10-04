@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axiosClient from '../axios-client';
+import { useStateContext } from '../utils/ContextProvider';
 
 
 function CaseRegistration() {
   const [submissionMessage, setSubmissionMessage] = useState('');
   const [dist, setDistricts] = useState([]);
-
+  const { role } = useStateContext()
 
   const formik = useFormik({
     initialValues: {
@@ -88,8 +88,9 @@ function CaseRegistration() {
       <div className="container px-2 py-5 mx-auto">
         <div className="flex flex-col text-center w-full mb-2">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Register Your Case!</h1>
+          <h1>user:{role.role_name}</h1>
         </div>
-
+       
         <div className="lg:w-[95%] md:w-1/2 mx-auto ">
 
           {submissionMessage && (
@@ -158,7 +159,7 @@ function CaseRegistration() {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="p-2 w-1/5">
                   <div className="relative">
                     <label htmlFor="dist" className="leading-7 ml-1 text-sm text-gray-600">
